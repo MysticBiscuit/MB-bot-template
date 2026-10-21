@@ -15,98 +15,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase{
-    private SparkMax m_armExtenderOne;
-    private SparkMax m_armExtenderTwo;
-    private SparkMax m_intakeMotor;
-    private SparkMax m_shooterIndexer;
-    private SparkMax m_shooter;
-    private SparkMax m_hood;
-
-    private DigitalInput m_lowerLimit;
-    private DigitalInput m_upperLimit;
+    private SparkMax m_exampleMotorOne;
+    private SparkMax m_exampleMotorTwo;
 
     private final Pigeon2 m_gyro = new Pigeon2(Constants.DriveConstants.kGyroID);
 
-    public final Timer m_systemTimer = new Timer();
-    private boolean m_boxExtendRequested = false;
-    private boolean m_boxRetractRequested = false;
-    //private SparkAbsoluteEncoder armExtenderPosition = m_armExtenderOne.getAbsoluteEncoder();
-    //private double armDegrees = armExtenderPosition.getPosition();
-    private boolean m_armKillSwitch = false;
-    
-
     public IntakeSubsystem(){
-        m_armExtenderOne = new SparkMax(Constants.DriveConstants.kIntakeExtenderOneCanId, MotorType.kBrushless);
-        m_armExtenderTwo = new SparkMax(Constants.DriveConstants.kIntakeExtenderTwoCanId, MotorType.kBrushless);
-        m_intakeMotor = new SparkMax(Constants.DriveConstants.kIntakeMechanismCanId, MotorType.kBrushless);
-        m_shooterIndexer = new SparkMax(Constants.DriveConstants.kShooterIndexerCanId, MotorType.kBrushless);
-        m_shooter = new SparkMax(Constants.DriveConstants.kShooterCanId, MotorType.kBrushless);
-        m_hood = new SparkMax(Constants.DriveConstants.kIntakeHoodCanId, MotorType.kBrushless);
-        
-        m_lowerLimit = new DigitalInput(Constants.DriveConstants.dLowerLimitSwitchPort);
-        m_upperLimit = new DigitalInput(Constants.DriveConstants.dUpperLimitSwitchPort);
+        m_exampleMotorOne = new SparkMax(Constants.DriveConstants.kShooterIndexerCanId, MotorType.kBrushless);
+        m_exampleMotorTwo = new SparkMax(Constants.DriveConstants.kShooterCanId, MotorType.kBrushless);
     }
 
     @Override
     public void periodic(){
         if (!DriverStation.isAutonomous()){
-            //killSwitchOne(m_armKillSwitch, m_boxExtendRequested, m_boxRetractRequested);
+
         }
     }
 
-    /**private void extendBox(boolean boxExtendRequested, boolean boxRetractRequested //double armDegrees
-    ){
-        if (boxExtendRequested //&& armDegrees < 90 
-        && m_lowerLimit.get()) {
-            m_armExtenderOne.set(-0.05);
-            m_armExtenderTwo.set(0.05);
-            
-        } else if(m_boxRetractRequested //&& armDegrees > 0.8 
-        && m_upperLimit.get()) {
-            m_armExtenderOne.set(0.05);
-            m_armExtenderTwo.set(-0.05);
-            
-        } else {
-            m_armExtenderOne.set(0);
-            m_armExtenderTwo.set(0);
-            boxExtendRequested = false;
-            boxRetractRequested = false;
-        }
-    }*/
-
-    public void boxControls(boolean extendBox, boolean retractBox) {
-        if(extendBox && m_lowerLimit.get()) {
-            m_armExtenderOne.set(-0.18);
-            m_armExtenderTwo.set(0.18);
-        } else if (retractBox && m_upperLimit.get()) {
-            m_armExtenderOne.set(0.3);
-            m_armExtenderTwo.set(-0.3);
-        } else if (DriverStation.isTeleop()) {
-            m_armExtenderOne.set(0);
-            m_armExtenderTwo.set(0);
-        }
-    }
-
-   /**  private void killSwitchOne(boolean armKillSwitch, boolean boxExtendRequested, boolean boxRetractRequested){
-        if(armKillSwitch){
-            m_armExtenderOne.set(0);
-            boxExtendRequested = false;
-            boxRetractRequested = false;
-        }
-    }*/
-
-    public void intakeTime(boolean suckIt, boolean outtake) {
-        if(suckIt) {
-            m_intakeMotor.set(-1);
-        } else if(outtake) {
-            m_intakeMotor.set(1);
-        } else if (DriverStation.isTeleop()) {
-            m_intakeMotor.set(0);
-        }
-    }
-
-    public void shootingTime(boolean shootIt) {
-        if(shootIt) {
+    public void exampleFunction(boolean test) {
+        if(test) {
             m_shooter.set(-0.7);
         } else if (DriverStation.isTeleop()) {
             m_shooter.set(0);

@@ -151,7 +151,7 @@ DriveConstants.config, // The robot configuration
     double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond * Constants.DriveConstants.slowDownModifier;
     double rotDelivered = rot * DriveConstants.kMaxAngularSpeed * Constants.DriveConstants.slowDownModifier;
 
-    var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
+    SwerveModuleState[] swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
             ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered,
                 Rotation2d.fromDegrees(m_gyro.getYaw().getValueAsDouble()))
